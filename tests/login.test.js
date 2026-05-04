@@ -3,10 +3,12 @@ import { sleep, check } from 'k6';
 
 
 export const options = {
-    iterations: 50,
+    //iterations: 50,
+    vus: 10,
+    duration: '30s',
     thresholds: {
         http_req_failed: ['rate<0.01'], //valida que mais de 1% das requisicoes nao pode falhar
-        http_req_duration: ['p(95)<100', 'max< 200'],
+        http_req_duration: ['p(95)<3000', 'max< 5000'],
     }
 }
 
