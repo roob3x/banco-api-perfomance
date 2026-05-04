@@ -2,7 +2,6 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'))
 
-
 export const options = {
     //iterations: 50,
     stages: [
