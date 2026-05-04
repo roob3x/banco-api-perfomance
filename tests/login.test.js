@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'))
+import { getBaseUrl } from '../utils/variables.js';
 
 export const options = {
     //iterations: 50,
@@ -17,7 +18,7 @@ export const options = {
 }
 
 export default function () {
-    const url = 'http://localhost:3000/login'
+    const url = getBaseUrl() + '/login'
     //postLogin.username = "junior.lima"
     console.log(postLogin)
     const payload = JSON.stringify(postLogin)

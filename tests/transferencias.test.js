@@ -1,14 +1,15 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { getToken } from '../helpers/autenticacao.js'
+import { getBaseUrl } from '../utils/variables.js';
 
 export const options = {
   iterations: 1
 };
 
-export default function() {
+export default function () {
   const token = getToken()
-  const url = 'http://localhost:3000/transferencias'
+  const url = getBaseUrl() + '/transferencias';
   const payload = JSON.stringify({
     contaOrigem: 1,
     contaDestino: 2,
@@ -19,11 +20,14 @@ export default function() {
   const params = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorizaton': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token
     }
   }
+  console.log(payload)
 
   const res = http.post(url, payload, params)
-  check(res, { "status is 201": (res) => res.status === 201 });
+  check(res, {
+    'Validar que o satus é 201': (r) => r.status === 201,
+  })
   sleep(1);
 }

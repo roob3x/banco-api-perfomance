@@ -1,10 +1,10 @@
 import http from 'k6/http';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'))
+import { getBaseUrl } from '../utils/variables.js';
 
 export function getToken() {
-    const url = 'http://localhost:3000/login'
+    const url = getBaseUrl() + '/login'
     //postLogin.username = "junior.lima"
-    console.log(postLogin)
     const payload = JSON.stringify(postLogin)
 
     const params = {
